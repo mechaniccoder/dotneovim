@@ -8,6 +8,7 @@ set autoindent
 set smartindent
 set expandtab
 set number
+set nocindent
 
 set cursorline
 
@@ -21,19 +22,27 @@ call plug#begin('~/.vim/plugged')
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'alvan/vim-closetag'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'projekt0n/github-nvim-theme'
 Plug 'ryanoasis/vim-devicons'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
+Plug 'frazrepo/vim-rainbow'
 
 call plug#end()
 
 " theme
-colorscheme github_dark_default
+colorscheme github_dark
+let g:github_comment_style = "NONE"
+let g:github_keyword_style = "NONE"
+let g:github_function_style = "NONE"
+let g:github_variable_style = "NONE"
+
+"rainbow
+let g:rainbow_active = 1
 
 "nerdtree
 nnoremap <C-e> :NERDTreeFocus<CR>
@@ -84,3 +93,10 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+"coc go to
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
